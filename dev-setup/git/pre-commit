@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "Executing post-commit checks..."
+
+FILES_PATTERN='\.(js)(\..+)?$'
+FORBIDDEN='console\.[clear|dir|log|info|warn|error]'
+
+if git diff --cached --name-only | \
+    grep -E $FILES_PATTERN | \
+    xargs grep --with-filename -n $FORBIDDEN | \
+    grep -v '//';
+then
+    echo 'COMMIT REJECTED!  Found console. references. Please remove them before committing.'
+    exit 1;
+fi
+exit 0;
