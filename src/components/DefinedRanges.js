@@ -1,6 +1,12 @@
 import React from 'react';
-import {List, ListItem, ListItemText} from '@material-ui/core';
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
 import {isSameDay} from 'date-fns';
+import {fontWeight} from "@material-ui/system";
+
 
 const isSameRange = (first, second) => {
     const {startDate: fStart, endDate: fEnd} = first;
@@ -14,27 +20,34 @@ const isSameRange = (first, second) => {
 const DefinedRanges = ({
                            ranges,
                            setRange,
-                           selectedRange,
-                       }) => (
-    <List>
-        {ranges.map((range, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ListItem button key={idx} onClick={() => setRange(range)}>
-                <ListItemText
-                    primaryTypographyProps={{
-                        variant: 'body2',
-                        style: {
-                            fontWeight: isSameRange(range, selectedRange)
-                                ? 'bold'
-                                : 'normal',
-                        },
-                    }}
-                >
-                    {range.label}
-                </ListItemText>
-            </ListItem>
-        ))}
-    </List>
-);
+                           selectedRange
+                       }) => {
+    const [value, setValue] = React.useState(1);
+
+    const handleChange = (event) => {
+        const {value} = event.target
+        setValue(value);
+        const [rangeItem] = ranges.filter(item => item.key === value);
+        setRange(rangeItem)
+    };
+
+    return (
+        <FormControl component="fieldset" className={"ranges"}>
+            <FormLabel component="legend">Ranges</FormLabel>
+            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                {
+                    ranges.map((range, id) =>
+                        (<FormControlLabel control={<Radio color={"primary"}/>}
+                                           label={range.label}
+                                           key={id}
+                                           value={range.key}
+                                           className={isSameRange(range, selectedRange)
+                                                   ? 'bold'
+                                                   : 'normal'}/>))
+                }
+            </RadioGroup>
+        </FormControl>
+    );
+}
 
 export default DefinedRanges;

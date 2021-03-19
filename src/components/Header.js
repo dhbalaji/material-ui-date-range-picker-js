@@ -12,7 +12,7 @@ import {
     setMonth,
     getMonth,
     setYear,
-    getYear,
+    getYear
 } from 'date-fns';
 
 const useStyles = makeStyles(() => ({
@@ -28,9 +28,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 const MONTHS = [
-    'Jan',
+    'January',
     'Feb',
-    'Mar',
+    'March',
     'Apr',
     'May',
     'June',

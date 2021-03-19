@@ -7,3 +7,9 @@
     margin: 2rem auto;
   }
 }
+
+.bold {
+  .span:last-child {
+    font-weight: 700;
+  }
+}
