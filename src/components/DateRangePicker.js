@@ -13,7 +13,7 @@ import {
 
 // eslint-disable-next-line no-unused-vars
 import { getValidatedMonths, parseOptionalDate } from './utils';
-import { defaultRanges } from './lang';
+import { defaultRanges } from './TimeRangesList';
 
 import Menu from './Menu';
 

@@ -5,7 +5,6 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import {isSameDay} from 'date-fns';
-import {fontWeight} from "@material-ui/system";
 
 
 const isSameRange = (first, second) => {
@@ -34,7 +33,7 @@ const DefinedRanges = ({
     return (
         <FormControl component="fieldset" className={"ranges"}>
             <FormLabel component="legend">Ranges</FormLabel>
-            <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+            <RadioGroup aria-label="ranges" name="ranges" value={value} onChange={handleChange}>
                 {
                     ranges.map((range, id) =>
                         (<FormControlLabel control={<Radio color={"primary"}/>}

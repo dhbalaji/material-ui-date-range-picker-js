@@ -10,7 +10,7 @@ import {
 
 const getDefaultRanges = (date) => [
     {
-        label: 'Today 21',
+        label: 'Today',
         startDate: date,
         endDate: date,
         key: "1"
