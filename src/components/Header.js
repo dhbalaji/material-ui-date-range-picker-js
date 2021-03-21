@@ -75,7 +75,7 @@ const Header = ({
                     disabled={prevDisabled}
                     onClick={onClickPrevious}
                 >
-                    <ChevronLeft color={prevDisabled ? 'disabled' : 'action'}/>
+                    <ChevronLeft color={prevDisabled ? 'disabled' : 'primary'}/>
                 </IconButton>
             </Grid>
             <Grid item>
@@ -109,7 +109,7 @@ const Header = ({
             </Grid>
             <Grid item className={classes.iconContainer}>
                 <IconButton className={classes.icon} disabled={nextDisabled} onClick={onClickNext}>
-                    <ChevronRight color={nextDisabled ? 'disabled' : 'action'}/>
+                    <ChevronRight color={nextDisabled ? 'disabled' : 'primary'}/>
                 </IconButton>
             </Grid>
         </Grid>

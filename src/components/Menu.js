@@ -5,22 +5,19 @@ import {
     Typography,
     Divider,
     makeStyles,
-    // eslint-disable-next-line no-unused-vars
-    Theme,
 } from '@material-ui/core';
-import { format, differenceInCalendarMonths } from 'date-fns';
-import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
+import {differenceInCalendarMonths} from 'date-fns';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
-import { MARKERS } from './DateRangePicker';
+import {MARKERS} from './DateRangePicker';
 
 const useStyles = makeStyles((theme) => ({
     header: {
-        padding: '20px 70px',
+        padding: '20px 10px',
     },
     headerItem: {
         flex: 1,
-        textAlign: 'center',
+        padding:"0 0 0 25px"
     },
     divider: {
         borderLeft: `1px solid ${theme.palette.action.hover}`,
@@ -45,57 +42,61 @@ const Menu = (props) => {
         handlers,
     } = props;
 
-    const { startDate, endDate } = dateRange;
     const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
     const commonProps = {
         dateRange, minDate, maxDate, helpers, handlers,
     };
     return (
-        <Paper elevation={5} square>
+        <Paper elevation={0} square>
             <Grid container direction="row" wrap="nowrap">
                 <Grid>
                     <Grid container className={classes.header} alignItems="center">
-                        <Grid item className={classes.headerItem}>
+                        <Grid item className={classes.headerItem} sm={4}>
                             <Typography variant="subtitle1">
-                                {startDate ? format(startDate, 'MMMM DD, YYYY') : 'Start Date'}
+                                Start Date
                             </Typography>
                         </Grid>
-                        <Grid item className={classes.headerItem}>
-                            <ArrowRightAlt color="action" />
-                        </Grid>
-                        <Grid item className={classes.headerItem}>
+                        <Grid item className={classes.headerItem} sm={4}>
                             <Typography variant="subtitle1">
-                                {endDate ? format(endDate, 'MMMM DD, YYYY') : 'End Date'}
+                                End Date
+                            </Typography>
+                        </Grid>
+                        <Grid item className={classes.headerItem} sm={4}>
+                            <Typography variant="subtitle1">
+                                Predefined Ranges
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Divider />
+                    <Divider/>
                     <Grid container direction="row" justify="center" wrap="nowrap">
-                        <Month
-                            {...commonProps}
-                            value={firstMonth}
-                            setValue={setFirstMonth}
-                            navState={[true, canNavigateCloser]}
-                            marker={MARKERS.FIRST_MONTH}
-                        />
-                        <div className={classes.divider} />
-                        <Month
-                            {...commonProps}
-                            value={secondMonth}
-                            setValue={setSecondMonth}
-                            navState={[canNavigateCloser, true]}
-                            marker={MARKERS.SECOND_MONTH}
-                        />
+                        <Grid item>
+                            <Month
+                                {...commonProps}
+                                value={firstMonth}
+                                setValue={setFirstMonth}
+                                navState={[true, canNavigateCloser]}
+                                marker={MARKERS.FIRST_MONTH}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Month
+                                {...commonProps}
+                                value={secondMonth}
+                                setValue={setSecondMonth}
+                                navState={[canNavigateCloser, true]}
+                                marker={MARKERS.SECOND_MONTH}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <DefinedRanges
+                                selectedRange={dateRange}
+                                ranges={ranges}
+                                setRange={setDateRange}
+                            />
+                        </Grid>
                     </Grid>
                 </Grid>
-                <div className={classes.divider} />
-                <Grid>
-                    <DefinedRanges
-                        selectedRange={dateRange}
-                        ranges={ranges}
-                        setRange={setDateRange}
-                    />
-                </Grid>
+                <div className={classes.divider}/>
             </Grid>
         </Paper>
     );

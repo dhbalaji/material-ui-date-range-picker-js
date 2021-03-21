@@ -27,7 +27,7 @@ const WEEK_DAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 const useStyles = makeStyles(() => ({
     root: {
-        width: 290,
+        width: 300,
     },
     weekDaysContainer: {
         marginTop: 10,
